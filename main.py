@@ -20,16 +20,23 @@ total_manual_loss = 0
 total_machine_loss = 0
 
 for month in range(1, 13, 1):
-    harvest = float(input(f"\nMês {month}....: "))
-    manual_loss = harvest * 0.05
-    machine_loss = harvest * 0.15
+    while True:
+        try:
+            harvest = float(input(f"\nMês {month}....: "))
+            if harvest < 0:
+                raise ValueError
+            manual_loss = harvest * 0.05
+            machine_loss = harvest * 0.15
 
-    total_harvest += harvest
-    total_manual_loss += manual_loss
-    total_machine_loss += machine_loss
+            total_harvest += harvest
+            total_manual_loss += manual_loss
+            total_machine_loss += machine_loss
 
-    print(f"\n\tPerda manual.......: {manual_loss:.2f}")
-    print(f"\n\tPerda com máquina..: {machine_loss:.2f}")
+            print(f"\n\tPerda manual.......: {manual_loss:.2f}")
+            print(f"\n\tPerda com máquina..: {machine_loss:.2f}")
+            break
+        except ValueError:
+            print("O valor inserido deve ser um número (inteiro ou decimal) e positivo")
 
 print(
     "\n\nRELATÓRIO CONSOLIDADO:\n",
